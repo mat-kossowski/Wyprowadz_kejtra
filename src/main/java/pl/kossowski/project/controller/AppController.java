@@ -11,6 +11,8 @@ public class AppController {
     @GetMapping("/home")
     public ModelAndView getHomePage(){return new ModelAndView("home");}
 
+    @GetMapping("/")
+    public ModelAndView getFirstPage(){return new ModelAndView("index");}
 
     @GetMapping("/index")
     public ModelAndView IndexPage(){return new ModelAndView("index");}
@@ -18,6 +20,21 @@ public class AppController {
     @GetMapping("/guardian")
     public ModelAndView getGuardianPage() {
         return new ModelAndView("guardian");
+    }
+
+    @GetMapping("/db_guardian")
+    public ModelAndView getDbGuardianPage() {
+        return new ModelAndView("db_guardian");
+    }
+
+    @GetMapping("/onas")
+    public ModelAndView getONasPage() {
+        return new ModelAndView("onas");
+    }
+
+    @GetMapping("/contact")
+    public ModelAndView getContactPage() {
+        return new ModelAndView("contact");
     }
 
     @GetMapping("/owner")
