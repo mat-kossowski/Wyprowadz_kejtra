@@ -112,10 +112,10 @@
 
     <div class="content">
         <div class="door_guardian">
-            <a href="/guardian"><img src="drzwi.jpg" /></a>
+            <a href="/addGuardian"><img src="drzwi.jpg" /></a>
         </div>
         <div class="door_owner">
-            <a href="/owner"><img src="drzwi.jpg" /></a></div>
+            <a href="/addOwner"><img src="drzwi.jpg" /></a></div>
     </div>
     <div style="clear:both;"></div>
 </div>
