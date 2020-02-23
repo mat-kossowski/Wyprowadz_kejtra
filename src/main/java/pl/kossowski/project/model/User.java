@@ -16,10 +16,16 @@ public class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
+    private String email;
 
 
     @ManyToOne(targetEntity = Role.class)
     private Role role;
+
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public User() {
     }
@@ -32,19 +38,21 @@ public class User implements UserDetails {
         return Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName);
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, firstName, lastName);
+        return Objects.hash(username, password, firstName, lastName, email);
     }
 
-    public User(String username, String password, String firstName, String lastName) {
+    public User(String username, String password, String firstName, String lastName, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
     }
 
     @Override
@@ -80,5 +88,41 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Role getRole() {
+        return role;
     }
 }
