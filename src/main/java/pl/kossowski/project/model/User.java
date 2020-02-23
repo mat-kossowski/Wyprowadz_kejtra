@@ -17,6 +17,9 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
+    private String city;
+
 
 
     @ManyToOne(targetEntity = Role.class)
@@ -39,20 +42,24 @@ public class User implements UserDetails {
                 Objects.equals(password, user.password) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email);
+                Objects.equals(email, user.email) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(city, user.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, firstName, lastName, email);
+        return Objects.hash(username, password, firstName, lastName, email, phone, city);
     }
 
-    public User(String username, String password, String firstName, String lastName, String email) {
+    public User(String username, String password, String firstName, String lastName, String email, String phone, String city) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.phone = phone;
+        this.city = city;
     }
 
     @Override
@@ -124,5 +131,21 @@ public class User implements UserDetails {
 
     public Role getRole() {
         return role;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

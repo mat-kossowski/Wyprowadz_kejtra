@@ -10,4 +10,8 @@ class ProjectApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    void addUser() {
+    }
+
 }

@@ -1,8 +1,8 @@
 package pl.kossowski.project.controller;
 
 
-import net.bytebuddy.description.modifier.Ownership;
-import org.hibernate.annotations.GeneratorType;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,12 +14,14 @@ import pl.kossowski.project.service.UserService;
 
 @Controller
 public class AppController {
-    public AppController(UserService userService) {
+    public AppController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     private final UserService userService;
 
+    private final  PasswordEncoder passwordEncoder;
 
     @GetMapping("/home")
     public ModelAndView getHomePage() {
@@ -48,6 +50,7 @@ public class AppController {
 
     @PostMapping("/addUser")
     public String addUser(@ModelAttribute User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addUser(user);
         return "redirect:/";
     }
@@ -58,13 +61,22 @@ public class AppController {
         ModelAndView modelAndView = new ModelAndView("addUser");
         User user = new User();
         user.setRole(userService.getGuardianRole());
-        modelAndView.addObject("user" , user);
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
+
     @GetMapping("/login/{username}")
     public ModelAndView userDetailsView(@PathVariable String username) {
         ModelAndView modelAndView = new ModelAndView("userView");
         modelAndView.addObject("user", userService.loadUserByUsername(username));
+        return modelAndView;
+    }
+
+    @GetMapping("user/update/{username}")
+    public ModelAndView updateUserView(@PathVariable String username) {
+        ModelAndView modelAndView = new ModelAndView("addUser");
+        modelAndView.addObject("user", userService.loadUserByUsername(username));
+        modelAndView.addObject("update", true);
         return modelAndView;
     }
 
@@ -74,7 +86,7 @@ public class AppController {
         ModelAndView modelAndView = new ModelAndView("addUser");
         User user = new User();
         user.setRole(userService.getOwnerRole());
-        modelAndView.addObject("user" , user);
+        modelAndView.addObject("user", user);
         return modelAndView;
     }
 
