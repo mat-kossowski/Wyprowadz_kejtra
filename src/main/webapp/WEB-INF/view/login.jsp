@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page session="true" %>
 <head>
     <meta charset="utf-8"/>
@@ -142,6 +143,8 @@
               action="<c:url value='/login' />" method='POST'>
             <input type='text' name='username' placeholder="login"/>
             <input type='password' name='password' placeholder="haslo" />
+
+
             <input type="submit" value="Zaloguj sie" />
         </form>
     </div>

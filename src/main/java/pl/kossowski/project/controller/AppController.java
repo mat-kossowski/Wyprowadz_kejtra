@@ -61,6 +61,14 @@ public class AppController {
         modelAndView.addObject("user" , user);
         return modelAndView;
     }
+    @GetMapping("/login/{username}")
+    public ModelAndView userDetailsView(@PathVariable String username) {
+        ModelAndView modelAndView = new ModelAndView("userView");
+        modelAndView.addObject("user", userService.loadUserByUsername(username));
+        return modelAndView;
+    }
+
+
     @GetMapping("/addOwner")
     public ModelAndView createOwnerView() {
         ModelAndView modelAndView = new ModelAndView("addUser");

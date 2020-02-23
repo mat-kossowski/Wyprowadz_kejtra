@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").authenticated()
                 .and()
                 .formLogin().loginPage("/login")
+                .defaultSuccessUrl("/login/{username}", true)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(successHandler())
@@ -63,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     AuthenticationSuccessHandler successHandler() {
-        return new SavedRequestAwareAuthenticationSuccessHandler();
+        return new RedirectionUrlAuthenticationSuccessHandler();
     }
 
     @Bean
